@@ -1,36 +1,30 @@
+require("dotenv").config();
 let express = require("express");
 let mongoose = require("mongoose");
-let cors = require("cors");
-let bodyParser = require("body-parser");
-
-const itemRoute = require("./routes/itemroutes");
-mongoose
-    .connect("mongodb://127.0.0.1:27017/passitems")
-    .then((x) => {
-        console.log(`Connected to Mongo! Database name:${x.connections[0].name}`);
-    })
-    .catch((err) => {
-        console.error("Error connecting to mongo", err.reason);
-    });
 const app = express();
-app.use(bodyParser.json());
-app.use(
-    bodyParser.urlencoded({
-        extended: true,
-    })
-);
-app.use(cors());
-app.use("/items", itemRoute);
+
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((x) => {
+    console.log(`Connected to Mongo! Database name:${x.connections[0].name}`);
+  })
+  .catch((err) => {
+    console.error("Error connecting to mongo", err.reason);
+  });
+app.use(express.json());
+require("./models/user");
+require("./models/Item");
+
+const authRouter = require("./routes/auth");
+const itemRoute = require("./routes/itemRoute");
+app.use("/auth", authRouter);
+
+app.use("/api/item", itemRoute);
 
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
-    console.log("Connected to port: " + port);
-});
-app.use((req, res, next) => {
-    next(createError(404));
-});
-app.use(function(err, req, res, next) {
-    console.error(err.message);
-    if (!err.statusCode) err.statusCode = 500;
-    res.status(err.statusCode).send(err.message);
+  console.log("Connected to port: " + port);
 });
