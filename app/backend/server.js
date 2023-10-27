@@ -1,9 +1,11 @@
 require("dotenv").config();
 let express = require("express");
+let cors = require("cors");
 let mongoose = require("mongoose");
 let getPwnage = require("./pwned");
 const app = express();
-getPwnage("19B58");
+// getPwnage("19B58");
+app.use(cors());
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,

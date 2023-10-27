@@ -16,6 +16,7 @@ router.get("/", (req, res) => {
 
 router.post("/signup", (req, res) => {
   const { name, email, password } = req.body;
+  console.log(req.body);
   if (!email || !password || !name) {
     res.status(422).json({ error: "Please add all the fields" });
   } else {
@@ -37,7 +38,7 @@ router.post("/signup", (req, res) => {
               res.json({ message: "saved Successfully" });
             })
             .catch((err) => {
-              console.log(error);
+              console.log(err);
             });
         })
         .catch((err) => {
@@ -47,7 +48,7 @@ router.post("/signup", (req, res) => {
   }
 });
 
-router.post("/signin", (req, res) => {
+router.post("/login", (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(422).json({ error: "please add emailo or password" });

@@ -27,14 +27,14 @@ function MenuBar() {
                 <Link
                   className="nav-link active"
                   aria-current="page"
-                  to={"/create-item"}
+                  to={"/signup"}
                 >
-                  New Item
+                  Sign Up
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to={"/list-item"}>
-                  Item List
+                <Link className="nav-link" to={"/login"}>
+                  Log In
                 </Link>
               </li>
             </ul>

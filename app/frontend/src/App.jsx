@@ -5,17 +5,22 @@ import MenuBar from "./components/MenuBar";
 import CreateItem from "./pages/CreateItem";
 import EditItem from "./pages/EditItem";
 import ListItem from "./pages/ListItem";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
     <div>
       <MenuBar />
+      {/* <Login /> */}
       <div>
         <Routes>
-          <Route path="/" element={<ListItem />}></Route>
-          <Route path="/create-item" element={<CreateItem />}></Route>
+          <Route exact path="/" element={<ListItem />}></Route>
+          {/* <Route path="/create-item" element={<CreateItem />}></Route>
           <Route path="/list-item" element={<ListItem />}></Route>
-          <Route path="/edit-item/:id" element={<EditItem />}></Route>
+          <Route path="/edit-item/:id" element={<EditItem />}></Route> */}
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
         </Routes>
       </div>
     </div>

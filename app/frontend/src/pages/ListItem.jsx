@@ -18,12 +18,12 @@ function ListItem() {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/items/`)
+      .get(`http://localhost:4000/api/item/item-list`)
       .then((res) => {
         setUserForm(res.data.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
       });
   });
   return (
