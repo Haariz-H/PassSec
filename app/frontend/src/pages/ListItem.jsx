@@ -18,9 +18,14 @@ function ListItem() {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/api/item/item-list`)
+      .get(`http://localhost:4000/api/item/item-list`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+      })
       .then((res) => {
-        setUserForm(res.data.data);
+        // console.log(res.data.items);
+        setUserForm(res.data.items);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -33,7 +38,7 @@ function ListItem() {
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Password</th>
+            {/* <th scope="col">Password</th> */}
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -43,7 +48,7 @@ function ListItem() {
               <tr key={index}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.password}</td>
+                {/* <td>{user.password}</td> */}
                 <td>
                   <Link
                     className="btn btn-primary btn-sm me-2"

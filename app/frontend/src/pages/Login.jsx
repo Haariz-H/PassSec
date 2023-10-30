@@ -34,6 +34,8 @@ function Login() {
             toast(res.error);
           } else {
             // console.log(res);
+            localStorage.setItem("jwt", res.data.token);
+            localStorage.setItem("user", JSON.stringify(res.data.user));
             console.log(res.data.token);
             toast("Sucessfully Logged In");
             setTimeout(() => {

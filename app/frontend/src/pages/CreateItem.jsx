@@ -16,7 +16,11 @@ function CreateItem() {
   const onSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/items/create-item", userForm)
+      .post("http://localhost:4000/api/item//create-item", userForm, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+      })
       .then((res) => {
         console.log(res.data);
         setUserForm({

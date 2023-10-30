@@ -16,9 +16,9 @@ function App() {
       <div>
         <Routes>
           <Route exact path="/" element={<ListItem />}></Route>
-          {/* <Route path="/create-item" element={<CreateItem />}></Route>
+          <Route path="/create-item" element={<CreateItem />}></Route>
           <Route path="/list-item" element={<ListItem />}></Route>
-          <Route path="/edit-item/:id" element={<EditItem />}></Route> */}
+          <Route path="/edit-item/:id" element={<EditItem />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
         </Routes>

@@ -8,6 +8,7 @@ router.get("/item-list", requiredLogin, (req, res) => {
   Item.find({ postedBy: req.user._id })
     .then((items) => {
       res.json({ items });
+      // console.log(items);
     })
     .catch((err) => {
       console.log(err);

@@ -20,24 +20,37 @@ function EditItem() {
     e.preventDefault();
     // console.log("http://localhost:4000/employees/update-employee/" + params.id);
     axios
-      .put("http://localhost:4000/employees/update-employee/" + params.id, {
-        name: userForm.name,
-        email: userForm.email,
-        empno: userForm.password,
-      })
+      .patch(
+        "http://localhost:4000/api/item/" + params.id,
+        {
+          name: userForm.name,
+          email: userForm.email,
+          password: userForm.password,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
+          },
+        }
+      )
       .then((res) => {
         console.log({ status: res.status });
-        navigate("/list-employee");
+        navigate("/");
       });
   };
   useEffect(() => {
     axios
-      .get("http://localhost:4000/items/get-item/" + params.id)
+      .get("http://localhost:4000/api/item/" + params.id, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+      })
       .then((res) => {
+        console.log(res.data.Item);
         setUserForm({
-          name: res.data.data.name,
-          email: res.data.data.email,
-          empno: res.data.data.password,
+          name: res.data.Item.name,
+          email: res.data.Item.email,
+          password: res.data.Item.password,
         });
       });
   }, []);
