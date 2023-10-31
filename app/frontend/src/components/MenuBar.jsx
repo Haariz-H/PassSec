@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function MenuBar() {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+  const auth = localStorage.getItem("jwt");
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -23,7 +29,7 @@ function MenuBar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link
                   className="nav-link active"
                   aria-current="page"
@@ -36,6 +42,21 @@ function MenuBar() {
                 <Link className="nav-link" to={"/login"}>
                   Log In
                 </Link>
+              </li>
+              <li onClick={logout} className="nav-item">
+                <Link className="nav-link" to={"/logout"}>
+                  LogOut
+                </Link> */}
+              {/* </li> */}
+              <li onClick={logout} className="nav-link">
+                {" "}
+                {auth ? (
+                  <Link to="/logout">LogOut</Link>
+                ) : (
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                )}
               </li>
             </ul>
           </div>
