@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function EditItem() {
+function ViewItem() {
   const [userForm, setUserForm] = useState({
     name: "",
     email: "",
@@ -37,25 +37,26 @@ function EditItem() {
   };
   const onUpdate = (e) => {
     e.preventDefault();
+    navigate("/edit-item/" + params.id);
     // console.log("http://localhost:4000/employees/update-employee/" + params.id);
-    axios
-      .patch(
-        "http://localhost:4000/api/item/" + params.id,
-        {
-          name: userForm.name,
-          email: userForm.email,
-          password: userForm.password,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("jwt"),
-          },
-        }
-      )
-      .then((res) => {
-        console.log({ status: res.status });
-        navigate("/");
-      });
+    // axios
+    //   .patch(
+    //     "http://localhost:4000/api/item/" + params.id,
+    //     {
+    //       name: userForm.name,
+    //       email: userForm.email,
+    //       password: userForm.password,
+    //     },
+    //     {
+    //       headers: {
+    //         Authorization: "Bearer " + localStorage.getItem("jwt"),
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log({ status: res.status });
+    //     navigate("/");
+    //   });
   };
   useEffect(() => {
     axios
@@ -75,7 +76,7 @@ function EditItem() {
   }, []);
   return (
     <div>
-      <h1>Edit Item</h1>
+      <h1>View Item</h1>
       <div className="form-wrapper">
         <form className="my-5" onSubmit={onUpdate}>
           <div className="mb-3">
@@ -86,6 +87,7 @@ function EditItem() {
               name="name"
               value={userForm.name}
               onChange={inputHandler}
+              disabled
             />
             <label className="form-label" for="form6Example3">
               Name
@@ -102,6 +104,7 @@ function EditItem() {
               name="email"
               value={userForm.email}
               onChange={inputHandler}
+              disabled
             />
             <label className="form-label" for="form6Example5">
               Email
@@ -119,6 +122,7 @@ function EditItem() {
               name="password"
               value={userForm.password}
               onChange={inputHandler}
+              disabled
             />
             <label className="form-label" for="form6Example3">
               Password
@@ -135,7 +139,7 @@ function EditItem() {
             className="btn btn-primary btn-block mb-4"
             //   onClick={console.log}
           >
-            Update
+            Edit
           </button>
         </form>
         <ToastContainer
@@ -155,4 +159,4 @@ function EditItem() {
   );
 }
 
-export default EditItem;
+export default ViewItem;

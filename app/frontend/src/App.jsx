@@ -7,6 +7,7 @@ import EditItem from "./pages/EditItem";
 import ListItem from "./pages/ListItem";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ViewItem from "./pages/ViewItem";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/edit-item/:id" element={<EditItem />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/view-item/:id" element={<ViewItem />}></Route>
         </Routes>
       </div>
     </div>

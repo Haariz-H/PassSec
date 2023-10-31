@@ -52,6 +52,14 @@ function ListItem() {
                 <td>
                   <Link
                     className="btn btn-primary btn-sm me-2"
+                    to={"/view-item/" + user._id}
+                  >
+                    View
+                  </Link>
+                </td>
+                <td>
+                  <Link
+                    className="btn btn-primary btn-sm me-2"
                     to={"/edit-item/" + user._id}
                   >
                     Edit
