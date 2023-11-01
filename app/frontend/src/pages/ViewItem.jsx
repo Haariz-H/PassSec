@@ -5,6 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function ViewItem() {
+  const auth = localStorage.getItem("jwt");
+  const navigate = useNavigate();
+  // if (!auth) {
+  //   navigate("/");
+  // }
   const [userForm, setUserForm] = useState({
     name: "",
     email: "",
@@ -24,7 +29,7 @@ function ViewItem() {
     toast("Copied to clipboard");
   };
   let params = useParams();
-  let navigate = useNavigate();
+
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);

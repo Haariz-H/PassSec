@@ -39,7 +39,7 @@ function Login() {
             console.log(res.data.token);
             toast("Sucessfully Logged In");
             setTimeout(() => {
-              navigate("/");
+              navigate("/list-item");
             }, 1000);
           }
         })

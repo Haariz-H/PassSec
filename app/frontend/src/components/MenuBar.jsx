@@ -5,11 +5,12 @@ function MenuBar() {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.clear();
+    navigate("/login");
   };
   const auth = localStorage.getItem("jwt");
-  if (!auth) {
-    navigate("/login");
-  }
+  // if (!auth) {
+  //   navigate("/login");
+  // }
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -53,15 +54,13 @@ function MenuBar() {
               <li onClick={logout} className="nav-item">
                 {" "}
                 {auth ? (
-                  <Link className="nav-link" to="/logout">
+                  <Link className="nav-link" to={"/logout"}>
                     LogOut
                   </Link>
                 ) : (
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/login">
-                      Login
-                    </Link>
-                  </li>
+                  <Link className="nav-link" to={"/login"}>
+                    Login
+                  </Link>
                 )}
               </li>
             </ul>

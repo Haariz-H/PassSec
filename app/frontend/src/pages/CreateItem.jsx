@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function CreateItem() {
+  const auth = localStorage.getItem("jwt");
+  const navigate = useNavigate();
+  // if (!auth) {
+  //   navigate("/login");
+  // }
   const [userForm, setUserForm] = useState({
     name: "",
     email: "",
@@ -12,6 +18,10 @@ function CreateItem() {
       ...preNext,
       [e.target.name]: e.target.value,
     }));
+  };
+  const [show, setShow] = useState(false);
+  const handleShow = () => {
+    setShow(!show);
   };
   const onSubmit = (e) => {
     e.preventDefault();
@@ -28,6 +38,7 @@ function CreateItem() {
           email: "",
           password: "",
         });
+        navigate("/list-item");
       });
   };
   return (
@@ -63,7 +74,7 @@ function CreateItem() {
           </div>
           <div className="form-outline mb-4">
             <input
-              type="text"
+              type={show ? "text" : "password"}
               id="form6Example3"
               className="form-control"
               name="password"
@@ -72,6 +83,9 @@ function CreateItem() {
             />
             <label className="form-label" for="form6Example3">
               password
+            </label>
+            <label className="btn" onClick={handleShow}>
+              {show ? "Hide" : "Show"}
             </label>
           </div>
 

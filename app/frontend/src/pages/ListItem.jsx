@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 function ListItem() {
+  const auth = localStorage.getItem("jwt");
+  const navigate = useNavigate();
+  // if (!auth) {
+  //   navigate("/");
+  // }
   const [userForm, setUserForm] = useState([]);
   // console.log(userForm);
   const deleteEmployee = (_id) => {
     console.log(_id);
     axios
-      .delete("http://localhost:4000/items/delete-item/" + _id)
-      .then(() => {
+      .delete("http://localhost:4000/api/item/delete-item/" + _id, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
         console.log("Data successfully added");
       })
       .catch((error) => {

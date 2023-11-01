@@ -63,15 +63,25 @@ router.patch("/:id", requiredLogin, async (req, res) => {
   console.log(req.user._id);
   const itemId = req.params.id;
   const newItem = await Item.findOneAndUpdate({ _id: itemId }, req.body, {
-    new: true,
+    new: false,
   });
   res.json({ newItem });
 });
 
-router.delete("/:id", requiredLogin, (req, res) => {
+router.delete("/delete-item/:id", requiredLogin, async (req, res) => {
   const id = req.params.id;
-  const data = Item.deleteOne({ id });
-  res.send("successfully Deleted");
+  // const data = Item.findById({ id });
+  await Item.findByIdAndRemove({ _id: id })
+    .then(() => {
+      res.json({
+        msg: "Data Successfully updated",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  // console.log(data);
+  // res.send("successfully Deleted");
 });
 
 module.exports = router;
